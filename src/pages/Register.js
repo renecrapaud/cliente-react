@@ -10,18 +10,19 @@ export default function Register(){
     const [confirm, setConfirm] = useState("")
 
     const handleSubmit = async (e) => {
-        e.preventDefaul()
+        e.preventDefault()
         try{
             if(password !== confirm){
                 toast.error("Passwords do not match")
                 return
             }
-            const {data} = await axios.post("http://localhost:8000/api/register", {name, email, password})
+            const {data} = await axios.post(`${process.env.REACT_APP_API}/signup`, {name, email, password})
             if(data.error){
                 toast.error(data.error)
                 return
             } else {
                 toast.success("Succesfully Registered")
+                console.log(data)
                 window.location.href = "/login"
             }
         } catch (err){
