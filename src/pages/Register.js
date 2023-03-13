@@ -1,14 +1,20 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import Input from "../components/forms/Input"
 import toast, { Toaster } from "react-hot-toast"
 import axios from "axios"
+import { AuthContext } from "../context/auth"
+import { useNavigate } from "react-router-dom"
 
 export default function Register(){
+    // global context
+    const [auth, setAuth] = useContext(AuthContext)
+    //local State
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [name, setName] = useState("")
     const [confirm, setConfirm] = useState("")
 
+    const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
@@ -21,9 +27,14 @@ export default function Register(){
                 toast.error(data.error)
                 return
             } else {
+                // Save in global context
+                setAuth(data)
+                // save in browser local storage
+                localStorage.setItem("auth", JSON.stringify(data))
                 toast.success("Succesfully Registered")
-                console.log(data)
-                window.location.href = "/login"
+                setTimeout(()=>{
+                    navigate("/")
+                }, 2000)
             }
         } catch (err){
             toast.error(err)
