@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast"
 import axios from "axios"
 import { AuthContext } from "../context/auth"
 import { useNavigate } from "react-router-dom"
+import Button from "../components/forms/Button"
 
 export default function Register(){
     // global context
@@ -13,6 +14,7 @@ export default function Register(){
     const [password, setPassword] = useState("")
     const [name, setName] = useState("")
     const [confirm, setConfirm] = useState("")
+    const [isLoading, setLoading] = useState(false)
 
     const navigate = useNavigate()
     const handleSubmit = async (e) => {
@@ -22,7 +24,9 @@ export default function Register(){
                 toast.error("Passwords do not match")
                 return
             }
+            setLoading(true)
             const {data} = await axios.post(`${process.env.REACT_APP_API}/signup`, {name, email, password})
+            setLoading(false)
             if(data.error){
                 toast.error(data.error)
                 return
@@ -52,15 +56,7 @@ export default function Register(){
                             <Input value={email} setValue={setEmail} label="Email" type="email"/>
                             <Input value={password} setValue={setPassword} label="Password" type="password"/>
                             <Input value={confirm} setValue={setConfirm} label="Confirm Password" type="password"/>
-                            
-                            <button 
-                                type="submit"
-                                className="btn btn-primary"
-                                onClick={handleSubmit}
-                                disabled={!name || !email || !password || !confirm || password.length < 6 }
-                            >
-                                Submit
-                            </button>
+                            <Button handleSubmit={handleSubmit} email={email} password={password} loading={isLoading} />
                         </form>
 
                     </div>
