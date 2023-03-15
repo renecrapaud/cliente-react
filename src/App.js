@@ -3,8 +3,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import PageNotFound from './pages/PNF';
 import Main from './components/nav/Main';
-
+import ForgotPassword from './pages/ForgotPassword';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import toast, { Toaster } from "react-hot-toast"
 import { AuthProvider } from './context/auth';
 
 function App() {
@@ -12,10 +13,12 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
       <Main/>
+        <Toaster/>
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/login' element={<Login />}/>
+          <Route path='/forgot-password' element={<ForgotPassword />}/>
           <Route path='*' element={<PageNotFound />}/>
         </Routes>
       </BrowserRouter>

@@ -1,10 +1,11 @@
 import { useState, useContext } from "react"
 import Input from "../components/forms/Input"
-import toast, { Toaster } from "react-hot-toast"
+import toast from "react-hot-toast"
 import axios from "axios"
 import { AuthContext } from "../context/auth"
 import { useNavigate } from "react-router-dom"
 import Button from "../components/forms/Button" 
+import { NavLink } from "react-router-dom"
 
 export default function Login(){
     // global context
@@ -38,7 +39,6 @@ export default function Login(){
     }
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
-            <Toaster/>
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
@@ -48,7 +48,9 @@ export default function Login(){
                             <Input value={password} setValue={setPassword} label="Password" type="password"/>
                             <Button handleSubmit={handleSubmit} email={email} password={password} loading={isLoading}/>
                         </form>
-
+                        <p className="mt-3">
+                            <NavLink to="/forgot-password">Forgot password?</NavLink>
+                        </p>
                     </div>
                 </div>
             </div>

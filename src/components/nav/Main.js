@@ -22,7 +22,7 @@ export default function Main(){
                         <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             {auth?.user?.name}
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul className="dropdown-menu">
                             <li>
                                 <NavLink className="nav-link" to="/">
                                     Home

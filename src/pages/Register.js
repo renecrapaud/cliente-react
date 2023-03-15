@@ -1,6 +1,6 @@
 import { useState, useContext } from "react"
 import Input from "../components/forms/Input"
-import toast, { Toaster } from "react-hot-toast"
+import toast from "react-hot-toast"
 import axios from "axios"
 import { AuthContext } from "../context/auth"
 import { useNavigate } from "react-router-dom"
@@ -36,9 +36,7 @@ export default function Register(){
                 // save in browser local storage
                 localStorage.setItem("auth", JSON.stringify(data))
                 toast.success("Succesfully Registered")
-                setTimeout(()=>{
-                    navigate("/")
-                }, 2000)
+                navigate("/")
             }
         } catch (err){
             toast.error(err)
@@ -46,7 +44,6 @@ export default function Register(){
     }
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
-            <Toaster/>
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
@@ -56,7 +53,7 @@ export default function Register(){
                             <Input value={email} setValue={setEmail} label="Email" type="email"/>
                             <Input value={password} setValue={setPassword} label="Password" type="password"/>
                             <Input value={confirm} setValue={setConfirm} label="Confirm Password" type="password"/>
-                            <Button handleSubmit={handleSubmit} email={email} password={password} loading={isLoading} />
+                            <Button handleSubmit={handleSubmit} name={name} email={email} password={password} loading={isLoading} />
                         </form>
 
                     </div>
