@@ -14,7 +14,7 @@ export default function Main(){
     }
 
     return (
-        <ul className="nav shadow mb-2 d-flex justify-content-between">
+        <ul className="nav shadow mb-2 d-flex justify-content-center">
             
             { auth !== null && auth !== undefined ? (
                 <>
